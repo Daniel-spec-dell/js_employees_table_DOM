@@ -171,8 +171,16 @@ form.addEventListener('submit', (e) => {
   const age = +inputAge.value;
   const salary = +inputSalary.value;
 
-  if (!userName || !position || !age || !salary || !office) {
-    pushNotification('error', 'All fields are requared');
+  if (
+    !userName ||
+    !position ||
+    !age ||
+    !salary ||
+    !office ||
+    age === '' ||
+    salary === ''
+  ) {
+    pushNotification('error', 'All fields are required');
 
     return;
   }
@@ -185,6 +193,8 @@ form.addEventListener('submit', (e) => {
 
   if (age < 18 || age > 90) {
     pushNotification('error', 'Age less 18 or bigger than 90');
+
+    return;
   }
 
   addEmployeeToTable(userName, position, office, age, salary);
